@@ -3,7 +3,7 @@
 - [Literature Review]()
 - [Hardware](/Hardware_Milestone_01_Team_5/)
 - [Simulation](/Simulation_Milestone_01_Team_5/)
-- [Literature Review]()
+- [Literature Review](/Autonomous_Systems_Literature_Review_Team_5.pdf)
 ### MileStone 2
 -
 -
