@@ -1,0 +1,33 @@
+<launch>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+
+    <include file="$(find audibot_gazebo)/launch/audibot_robot.launch" >
+        <arg name="start_x" value="0" />
+        <arg name="start_y" value="0" />
+        <arg name="start_z" value="0" />
+        <arg name="start_yaw" value="0" />
+        <arg name="pub_tf" value="true" />
+        <arg name="tf_freq" value="100.0" />
+        <arg name="blue" value="false" />
+    </include>
+
+    <arg name="mode" default="OLR"/>
+
+    <group if="$(eval mode == 'OLR')">
+        <node pkg="Autonomous_Systems_Project_Team_1" name="Autonomous_Systems_MS_2_OLR_Team_1" type="Autonomous_Systems_MS_2_OLR_Team_1.py" output="screen">
+            <param name="throttle" value="0.5"/>
+            <param name="steering" value="0.4"/>
+        </node>
+    </group>
+
+    <group if="$(eval mode == 'Teleop')">
+        <node pkg="Autonomous_Systems_Project_Team_1" name="Autonomous_Systems_MS_2_Teleop_Team_1" type="Autonomous_Systems_MS_2_Teleop_Team_1.py" output="screen">
+        </node>
+    </group>
+    
+
+    <node pkg="rqt_graph" name="rqt_graph" type="rqt_graph" output="screen">
+    </node>
+
+</launch>
