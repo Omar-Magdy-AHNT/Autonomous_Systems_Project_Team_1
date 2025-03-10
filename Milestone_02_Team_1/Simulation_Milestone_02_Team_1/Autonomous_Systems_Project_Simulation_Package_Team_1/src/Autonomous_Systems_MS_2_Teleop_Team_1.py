@@ -51,9 +51,9 @@ class Teleop:
             elif key == 's' or key == '[B':  
                 throttle_input = max(throttle_input - 0.05, 0.0)
             elif key == 'd' or key == '[D': 
-                steering_input = max(steering_input + 0.1, 0.8)
+                steering_input = min(steering_input + 0.1, 0.8)
             elif key == 'a' or key == '[C': 
-                steering_input = min(steering_input - 0.1, -0.8)
+                steering_input = max(steering_input - 0.1, -0.8)
             elif key == 'b':
                 throttle_input = 0
                 braking_input = 60.0    
