@@ -39,24 +39,31 @@ class Teleop:
         self.w = 0.0
         self.steering_angle = 0.0
         self.position_x = 0.0
+        self.position_y = 0.0
         self.heading = 0.0
 
 
         while not rospy.is_shutdown():
             key = self.get_key()
+            key_pressed = ""
             #print(f"key2:{key}")
             if key == 'w' or key == '[A':  
                 throttle_input = min(throttle_input + 0.05, 1.0)
                 braking_input = 0.0
+                key_pressed = "UP"
             elif key == 's' or key == '[B':  
                 throttle_input = max(throttle_input - 0.05, 0.0)
+                key_pressed = "DOWN"
             elif key == 'd' or key == '[D': 
                 steering_input = min(steering_input + 0.1, 0.8)
+                key_pressed = "LEFT"
             elif key == 'a' or key == '[C': 
                 steering_input = max(steering_input - 0.1, -0.8)
+                key_pressed = "RIGHT"
             elif key == 'b':
                 throttle_input = 0
-                braking_input = 60.0    
+                braking_input = 60.0   
+                key_pressed = "B" 
             elif key == 'q':  # Quit
                 rospy.loginfo("Shutting down Teleoperation Node.")
                 break
@@ -64,11 +71,13 @@ class Teleop:
             throttle_pub.publish(Float64(throttle_input))
             steering_pub.publish(Float64(steering_input))
             braking_pub.publish(Float64(braking_input))
+            rospy.loginfo(f"Key Pressed: {key_pressed}")
             rospy.loginfo(f"Throttle: {throttle_input}, Steering: {steering_input}")
-            rospy.loginfo(f"Velocity: {self.v}")
+            rospy.loginfo(f"Linear Velocity: {self.v}")
             rospy.loginfo(f"Angular Velocity :{self.w}")
             rospy.loginfo(f"Current Steering Angle: {self.steering_angle}")
-            rospy.loginfo(f"Position: {self.position_x}")
+            rospy.loginfo(f"Position x: {self.position_x}")
+            rospy.loginfo(f"Position y: {self.position_y}")
             rospy.loginfo(f"heading: {self.heading}")
 
             
@@ -107,6 +116,7 @@ class Teleop:
 
     def odom_callback(self, msg):
         self.position_x = msg.pose.pose.position.x
+        self.position_y = msg.pose.pose.position.y
         orientation_x = msg.pose.pose.orientation.x
         orientation_y = msg.pose.pose.orientation.y
         orientation_z = msg.pose.pose.orientation.z

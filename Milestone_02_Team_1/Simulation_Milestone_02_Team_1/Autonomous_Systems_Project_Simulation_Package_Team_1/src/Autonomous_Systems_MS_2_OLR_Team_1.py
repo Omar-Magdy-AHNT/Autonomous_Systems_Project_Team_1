@@ -15,8 +15,8 @@ from std_msgs.msg import Float64
 def main():
     rospy.init_node('openloop')
 
-    throttle_input = rospy.get_param('throttle', 0.3)
-    steering_input = rospy.get_param('steering', 0.2)
+    throttle_input = rospy.get_param('~throttle', 0.0)
+    steering_input = rospy.get_param('~steering', 0.0)
 
     throttle_pub = rospy.Publisher('/throttle_cmd', Float64, queue_size=10)
     steering_pub = rospy.Publisher('/steering_cmd', Float64, queue_size=10)
@@ -45,6 +45,7 @@ def steering_callback(msg):
 
 def odom_callback(msg):
     position_x = msg.pose.pose.position.x
+    position_y = msg.pose.pose.position.y
     orientation_x = msg.pose.pose.orientation.x
     orientation_y = msg.pose.pose.orientation.y
     orientation_z = msg.pose.pose.orientation.z
@@ -55,7 +56,8 @@ def odom_callback(msg):
 
     heading = math.atan2(siny_cosp, cosy_cosp)
 
-    rospy.loginfo(f"Position: {position_x}")
+    rospy.loginfo(f"Position x: {position_x}")
+    rospy.loginfo(f"Position y: {position_y}")
     rospy.loginfo(f"heading: {heading}")
 
 
