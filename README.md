@@ -1,50 +1,70 @@
-# Autonomous_Systems_Project_Team_1 
+# Autonomous Systems Project — Team 1
 
-### [Overleaf](https://www.overleaf.com/8317881217nwnzqvwkvkwh#5e357f)
+> A ROS Noetic autonomous Ackermann-steered vehicle capable of lane keeping
+> and obstacle avoidance, validated in Gazebo simulation and on a 1:4 scale
+> physical car.
 
-### MileStone 1 
-- [Hardware](/Milestone_01_Team_1/Hardware_Milestone_01_Team_1/)
-- [Simulation](/Milestone_01_Team_1/Simulation_Milestone_01_Team_1/)
-- [Literature Review](/Milestone_01_Team_1/Autonomous_Systems_Literature_Review_Team_1.pdf) 
-### MileStone 2
-- [Hardware](/Milestone_02_Team_1/Hardware_Milestone_02_Team_1/)
-- [Simulation](/Milestone_02_Team_1/Simulation_Milestone_02_Team_1/)
-### MileStone 3
-- [hardware teleop video](/Milestone_03_Team_1/Autonomous_Systems_Hardware_Control_Team_1.zip)
-- [ros package](/Milestone_03_Team_1/Autonomous_Systems_MS_3_Team_1.zip)
-- [video simulations](/Milestone_03_Team_1/Autonomous_Systems_MS_3_Team_1%20vid.mkv)
-- [arduino teleop code](/Milestone_03_Team_1/Autonomous_Systems_Hardware_Teleop_Team_1.zip)
-- [hardware speed control video](/Milestone_03_Team_1/speed%20control%20video.zip)
-- [arduino speed control code](/Milestone_03_Team_1/Arduino%20code%20speed%20control.zip)
-### MileStone 4
-- [Simulation Package](/Milestone_04_Team_1/Autonomous_Systems_Project_Simulation_Package_Team_1.zip)
-- [rqt Graph Screenshot](/Milestone_04_Team_1/Autonomous_Systems_Project_Simulation_MS_4_rqt_Team_1.png)
-- [Simulation Video](/Milestone_04_Team_1/Autonomous_Systems_Project_Simulation_MS_4_Team_1.mkv)
-- [Arduino Code](/Milestone_04_Team_1/Autonomous_Systems_Project_Hardware_Car_states_Team_1.zip)
-- [Hardware Package](/Milestone_04_Team_1/Autonomous_Systems_Project_Hardware_Team_1.zip)
-- [Car States Video](/Milestone_04_Team_1/Autonomous_Systems_Project_Hardware_Car_states_Team_1.zip)
-- [Car Motion Video](/Milestone_04_Team_1/Autonomous_Systems_Project_Hardware_Car_motion_Team_1.mp4)
-### MileStone 5
-- [Simulation Package](/Milestone_05_Team_1/Autonomous_Systems_Project_Simulation_Package_Team_1.zip)
-- [rqt Graph Screenshot](/Milestone_05_Team_1/Autonomous_Systems_Project_Simulation_MS_5_rqt_Team_1.png)
-- [States Plots](/Milestone_05_Team_1/Autonomous_Systems_Project_Simulation_MS_5_Graphs_Team_1.zip)
-- [Simulation Video](/Milestone_05_Team_1/Autonomous_Systems_Project_Simulation_MS_5_Team_1.mp4)
-- [Hardware Package](/Milestone_05_Team_1/Autonomous_Systems_Project_Hardware_MS_5_Team_1.zip)
-- [Arduino Codes](/Milestone_05_Team_1/Autonomous_Systems_Project_Hardware_Arduino_MS_5_Team_1.zip)
-- [Case1 Video](/Milestone_05_Team_1/Autonomous_Systems_Project_Hardware%20_%20MS_5_Case_1_Team_1.mp4)
-- [Case2 Video](/Milestone_05_Team_1/Autonomous_Systems_Project_Hardware%20_%20MS_5_Case_2_Team_1.mp4)Autonomous_Systems_Project_Report_Team_1
-- [Report](/Milestone_05_Team_1/Autonomous_Systems_Project_Report_Team_1.pdf)
+---
 
-### [Poster](/Poster.pdf)
+## Project Overview
 
+This project implements a complete autonomy stack for a 1:4 scale Ackermann
+car using ROS Noetic. The system integrates:
+
+- **Localization** via a Kalman filter fusing encoder and IMU data
+- **Planning** via a lane-switching planner with velocity profiling
+- **Lateral control** via Pure Pursuit (outperformed Stanley control in testing)
+- **Speed control** via a discrete PID controller
+- **Hardware interface** via Arduino/ESP32 over USB Serial
+
+The vehicle was validated on a 10-meter two-lane track:
+
+| Metric                      | Result    |
+|-----------------------------|-----------|
+| Average lane deviation      | 2.7 cm    |
+| Lane change time            | 1.1 s     |
+| Track completion time       | 7.3 s     |
+| Obstacle avoidance success  | 100%      |
+
+---
+
+## Hardware Stack
+
+| Component         | Part                              |
+|-------------------|-----------------------------------|
+| Chassis           | 1:4 scale Ackermann car           |
+| Processor         | Raspberry Pi 4B (ROS Noetic)      |
+| Motor interface   | Arduino Uno / ESP32               |
+| Drive motors      | DC motors + IR encoder            |
+| Motor driver      | Cytron Dual Channel MDD10A        |
+| Steering          | Stepper motor                     |
+| IMU               | 6-DOF IMU                         |
+
+---
+
+## Software Stack
+
+- **ROS Noetic** on Ubuntu 20.04
+- **Gazebo** (audibot_gazebo) for simulation
+- **Python 3** ROS nodes
+- **Arduino / FreeRTOS** for embedded actuator control
+
+---
+
+## Resources
+
+- [Final Report](/Milestone_05_Team_1/Autonomous_Systems_Project_Report_Team_1.pdf)
+- [Poster](/Poster.pdf)
+- [Overleaf](https://www.overleaf.com/8317881217nwnzqvwkvkwh#5e357f)
+
+---
 
 ## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This project is licensed under the MIT License.  
+This project is licensed under the MIT License.
 See the [LICENSE](./LICENSE) file for full details.
 
-This project was developed as a team effort.  
-All contributors are credited via the [GitHub contributors list](../../graphs/contributors).
-
+All contributors are credited via the
+[GitHub contributors list](../../graphs/contributors).
